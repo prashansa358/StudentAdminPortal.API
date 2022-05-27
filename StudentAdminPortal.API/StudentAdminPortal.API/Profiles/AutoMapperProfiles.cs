@@ -1,7 +1,7 @@
 ﻿
 using AutoMapper;
 using DataModels = StudentAdminPortal.API.DataModels;
-using StudentAdminPortal.API.DataModels;
+using StudentAdminPortal.API.DomainModels;
 
 namespace StudentAdminPortal.API.Profiles
 {
@@ -9,9 +9,9 @@ namespace StudentAdminPortal.API.Profiles
     {
         public AutoMapperProfiles()
         {
-            CreateMap<DataModels.Student, Student>().ReverseMap();
-            CreateMap<DataModels.Gender,Gender>().ReverseMap();
-            CreateMap<DataModels.Address,Address>().ReverseMap();
+            CreateMap<Student, DataModels.Student>().ReverseMap();
+            CreateMap<Gender, DataModels.Gender>().ReverseMap();
+            CreateMap<Address, DataModels.Address>().ReverseMap();
         }
     }
 }
