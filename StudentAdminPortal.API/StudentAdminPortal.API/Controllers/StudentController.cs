@@ -59,9 +59,9 @@ namespace StudentAdminPortal.API.Controllers
             return Ok(mapper.Map<List<Student>>(students));
         }
 
-       [HttpGet]
-       [Route("[controller]/{studentId:guid}")]
-       public async Task<IActionResult> GetStudentAsync([FromRoute] Guid studentId)
+        [HttpGet]
+        [Route("[controller]/{studentId:guid}")]
+        public async Task<IActionResult> GetStudentAsync([FromRoute] Guid studentId)
         {
             //Fetch Students Details
 
@@ -75,5 +75,25 @@ namespace StudentAdminPortal.API.Controllers
 
             return Ok(mapper.Map<Student>(student));
         }
+
+
+        [HttpPut]
+        [Route("[controller]/{studentId:guid}")]
+        public async Task<IActionResult> UpdateStudentAsync([FromRoute] Guid studentId, [FromBody] UpdateStudentRequest request)
+        {
+            if (await studentRepository.Exists(studentId))
+            {
+                //Update Details
+                var updatedStudent = await studentRepository.UpdateStudent(studentId, mapper.Map<DataModels.Student>(request));
+                if (updatedStudent != null)
+                {
+                    return Ok(mapper.Map<Student>(updatedStudent));
+                }
+            }
+
+            return NotFound();
+
+        }
+
     }
 }
